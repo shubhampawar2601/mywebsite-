@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shubham Portfolio</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Shubham Pawar | Portfolio</title>
 
 <style>
 *{
@@ -12,305 +12,1567 @@
     box-sizing:border-box;
 }
 
+:root{
+    --blue:#4f8cff;
+    --purple:#8b5cf6;
+    --cyan:#22d3ee;
+    --bg:#050711;
+    --card:rgba(14,18,35,.82);
+    --text:#fff;
+    --muted:#8e99b2;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
 body{
-    font-family:Arial, sans-serif;
-    background:#080b14;
-    color:white;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
     overflow-x:hidden;
 }
 
-/* ================= INTRO ================= */
+/* =========================================
+   PREMIUM BACKGROUND
+========================================= */
+
+.bg{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 35%,rgba(52,72,150,.22),transparent 32%),
+        radial-gradient(circle at 10% 80%,rgba(79,70,229,.15),transparent 30%),
+        radial-gradient(circle at 90% 15%,rgba(6,182,212,.10),transparent 28%),
+        #050711;
+    z-index:-10;
+}
+
+.grid{
+    position:absolute;
+    inset:-50%;
+    width:200%;
+    height:200%;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:45px 45px;
+    transform:perspective(500px) rotateX(60deg);
+    transform-origin:center top;
+    animation:gridMove 18s linear infinite;
+}
+
+@keyframes gridMove{
+    from{transform:perspective(500px) rotateX(60deg) translateY(0)}
+    to{transform:perspective(500px) rotateX(60deg) translateY(45px)}
+}
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.4;
+    animation:orbMove 8s ease-in-out infinite alternate;
+}
+
+.orb1{
+    width:280px;
+    height:280px;
+    background:#315eff;
+    left:-100px;
+    top:15%;
+}
+
+.orb2{
+    width:250px;
+    height:250px;
+    background:#7c3aed;
+    right:-100px;
+    top:50%;
+    animation-delay:2s;
+}
+
+.orb3{
+    width:180px;
+    height:180px;
+    background:#0891b2;
+    left:45%;
+    top:-80px;
+    animation-delay:4s;
+}
+
+@keyframes orbMove{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(45px,30px) scale(1.15)}
+}
+
+/* =========================================
+   INTRO
+========================================= */
 
 #intro{
     position:fixed;
     inset:0;
-    background:
-        radial-gradient(circle at 50% 40%,#18213b,#080b14 65%);
+    z-index:10000;
     display:flex;
-    justify-content:center;
     align-items:center;
-    z-index:9999;
+    justify-content:center;
+    background:
+        radial-gradient(circle at center,rgba(34,49,98,.35),transparent 45%),
+        #050711;
+    animation:introOut 1s 4s forwards;
 }
 
-.introBox{
+.introContent{
+    width:90%;
+    max-width:600px;
     text-align:center;
 }
 
+.smallLogo{
+    width:72px;
+    height:72px;
+    margin:0 auto 28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    font-size:25px;
+    font-weight:bold;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    box-shadow:
+        0 0 35px rgba(79,140,255,.35);
+    animation:logoPulse 2s infinite;
+}
+
+@keyframes logoPulse{
+    50%{
+        box-shadow:
+        0 0 55px rgba(139,92,246,.5);
+    }
+}
+
 .introTitle{
-    font-size:45px;
-    letter-spacing:8px;
-    font-weight:700;
-    animation:titleGlow 2s infinite alternate;
+    font-size:clamp(32px,9vw,68px);
+    font-weight:800;
+    letter-spacing:clamp(4px,2vw,12px);
+    background:linear-gradient(90deg,#fff,#9dbbff,#d4c2ff,#fff);
+    background-size:250%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:textShine 3s linear infinite;
 }
 
-@keyframes titleGlow{
-    from{opacity:.45;transform:scale(.97)}
-    to{opacity:1;transform:scale(1)}
+@keyframes textShine{
+    to{background-position:250%}
 }
 
-.loading{
-    width:240px;
-    height:4px;
-    background:#202638;
-    margin:25px auto 0;
-    overflow:hidden;
+.introSub{
+    margin-top:14px;
+    color:#7f8ba5;
+    letter-spacing:4px;
+    font-size:11px;
+}
+
+.introLine{
+    width:260px;
+    max-width:75vw;
+    height:3px;
+    margin:30px auto 0;
+    background:#171d31;
     border-radius:10px;
+    overflow:hidden;
 }
 
-.loadingBar{
+.introProgress{
     height:100%;
     width:0;
-    background:#4f8cff;
-    animation:load 3s forwards;
+    background:linear-gradient(90deg,var(--blue),var(--purple),var(--cyan));
+    animation:progress 4s linear forwards;
 }
 
-@keyframes load{
+@keyframes progress{
     to{width:100%}
 }
 
-/* ================= MAN SCENE ================= */
+@keyframes introOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+}
 
-#manScene{
+/* =========================================
+   CINEMATIC SCENE
+========================================= */
+
+#scene{
     position:fixed;
     inset:0;
-    background:
-      linear-gradient(to bottom,#101827 0%,#080b12 72%);
-    z-index:9998;
-    display:none;
+    z-index:9999;
+    opacity:0;
+    visibility:hidden;
     overflow:hidden;
+    background:
+        radial-gradient(circle at 50% 30%,rgba(35,53,105,.4),transparent 40%),
+        linear-gradient(#070b18,#03050b);
+    animation:
+        sceneIn 1s 4s forwards,
+        sceneOut 1s 8s forwards;
+}
+
+@keyframes sceneIn{
+    to{
+        opacity:1;
+        visibility:visible;
+    }
+}
+
+@keyframes sceneOut{
+    to{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+}
+
+.sceneTop{
+    position:absolute;
+    top:12%;
+    width:100%;
+    text-align:center;
+}
+
+.sceneTop span{
+    color:#65718c;
+    font-size:10px;
+    letter-spacing:5px;
+}
+
+.sceneTop h2{
+    margin-top:12px;
+    font-size:clamp(20px,5vw,32px);
+    letter-spacing:3px;
 }
 
 /* floor */
 
-.floor{
+.sceneFloor{
     position:absolute;
     bottom:0;
-    width:100%;
-    height:25%;
-    background:
-      linear-gradient(#111827,#080b12);
-    border-top:1px solid rgba(255,255,255,.05);
-}
-
-.floor:after{
-    content:"";
-    position:absolute;
-    top:35px;
     left:0;
     width:100%;
-    height:1px;
-    background:rgba(255,255,255,.06);
+    height:28%;
+    background:
+        linear-gradient(to bottom,transparent,#080b14 15%),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0,
+            transparent 80px,
+            rgba(255,255,255,.035) 81px,
+            transparent 82px
+        );
+    border-top:1px solid rgba(255,255,255,.07);
 }
 
-/* Man */
-
-.man{
+.sceneLight{
     position:absolute;
-    bottom:23%;
+    bottom:25%;
+    left:50%;
+    width:420px;
+    height:80px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse,rgba(79,140,255,.15),transparent 70%);
+    filter:blur(10px);
+}
+
+/* person */
+
+.person{
+    position:absolute;
+    bottom:25%;
     left:-180px;
-    width:120px;
-    height:250px;
-    animation:walkIn 4s ease-out forwards;
+    width:125px;
+    height:270px;
+    animation:personWalk 3.2s 4.4s ease-out forwards;
 }
 
-@keyframes walkIn{
-    0%{left:-180px}
-    100%{left:42%}
+@keyframes personWalk{
+    to{left:38%}
 }
 
-/* shadow */
-
-.manShadow{
+.shadow{
     position:absolute;
     bottom:-8px;
-    left:5px;
-    width:110px;
-    height:18px;
+    left:-5px;
+    width:130px;
+    height:20px;
     border-radius:50%;
-    background:rgba(0,0,0,.65);
-    filter:blur(5px);
+    background:#000;
+    filter:blur(7px);
 }
 
 /* head */
 
-.head{
+.pHead{
     position:absolute;
-    width:58px;
-    height:65px;
-    border-radius:48% 48% 45% 45%;
-    background:linear-gradient(135deg,#d99a72,#a96545);
-    left:31px;
+    left:34px;
     top:0;
+    width:57px;
+    height:65px;
+    border-radius:48%;
+    background:linear-gradient(135deg,#d89a72,#a65e42);
     z-index:4;
 }
 
-/* hair */
-
-.hair{
+.pHair{
     position:absolute;
-    width:62px;
-    height:30px;
-    background:#17130f;
-    border-radius:55% 55% 25% 25%;
     left:-2px;
-    top:-4px;
+    top:-5px;
+    width:61px;
+    height:29px;
+    border-radius:55% 55% 20% 20%;
+    background:#11100f;
 }
 
-/* ear */
-
-.ear{
+.pEye{
     position:absolute;
-    width:10px;
-    height:18px;
-    border-radius:50%;
-    background:#bd7655;
-    top:27px;
-}
-
-.ear.left{left:-5px}
-.ear.right{right:-5px}
-
-/* face */
-
-.eye{
-    position:absolute;
+    top:32px;
     width:6px;
     height:4px;
-    background:#161616;
     border-radius:50%;
-    top:31px;
+    background:#151515;
 }
 
-.eye.one{left:17px}
-.eye.two{right:17px}
+.pEye.left{left:16px}
+.pEye.right{right:16px}
 
-.nose{
+.pNose{
     position:absolute;
-    width:7px;
-    height:11px;
-    border-right:2px solid #935b45;
     top:35px;
     left:27px;
+    width:7px;
+    height:11px;
+    border-right:2px solid #8e5541;
 }
 
-.mouth{
+.pMouth{
     position:absolute;
-    width:15px;
+    bottom:11px;
+    left:21px;
+    width:16px;
     height:5px;
-    border-bottom:2px solid #7c4035;
+    border-bottom:2px solid #713b32;
     border-radius:50%;
-    bottom:12px;
-    left:22px;
 }
 
 /* neck */
 
-.neck{
+.pNeck{
     position:absolute;
-    width:25px;
+    left:49px;
+    top:58px;
+    width:24px;
     height:22px;
-    background:#ae694c;
-    left:47px;
-    top:57px;
-    z-index:2;
+    background:#a96146;
 }
 
-/* body / shirt */
+/* body */
 
-.body{
+.pBody{
     position:absolute;
-    width:83px;
-    height:105px;
-    background:linear-gradient(135deg,#263d68,#15243f);
-    border-radius:25px 25px 10px 10px;
-    left:19px;
+    left:20px;
     top:70px;
-    z-index:3;
-}
-
-/* shirt detail */
-
-.shirtLine{
-    position:absolute;
-    width:2px;
-    height:75px;
-    background:rgba(255,255,255,.08);
-    left:40px;
-    top:12px;
+    width:85px;
+    height:108px;
+    border-radius:24px 24px 12px 12px;
+    background:linear-gradient(135deg,#294b82,#111d35);
+    box-shadow:inset 0 0 25px rgba(255,255,255,.03);
 }
 
 /* arms */
 
-.arm{
+.pArm{
     position:absolute;
+    top:76px;
     width:23px;
-    height:92px;
-    background:linear-gradient(#bd7655,#94543f);
+    height:95px;
     border-radius:20px;
-    top:77px;
-    z-index:2;
+    background:linear-gradient(#bd7655,#8e503c);
 }
 
-.arm.left{
-    left:4px;
-    transform:rotate(10deg);
+.pArm.left{
+    left:3px;
+    transform:rotate(9deg);
 }
 
-.arm.right{
+.pArm.right{
     right:3px;
-    transform:rotate(-12deg);
-}
-
-/* hands */
-
-.hand{
-    position:absolute;
-    width:20px;
-    height:22px;
-    border-radius:50%;
-    background:#b96d4e;
-    bottom:-10px;
+    transform:rotate(-10deg);
 }
 
 /* legs */
 
-.leg{
+.pLeg{
     position:absolute;
-    width:29px;
-    height:85px;
-    background:linear-gradient(#1c2738,#111827);
-    top:164px;
-    border-radius:8px 8px 13px 13px;
+    top:166px;
+    width:30px;
+    height:87px;
+    background:linear-gradient(#1c2a41,#080d18);
+    border-radius:8px 8px 14px 14px;
 }
 
-.leg.left{
-    left:30px;
-    transform:rotate(3deg);
-}
+.pLeg.left{left:30px}
+.pLeg.right{right:30px}
 
-.leg.right{
-    right:30px;
-    transform:rotate(-3deg);
-}
-
-/* shoes */
-
-.shoe{
+.pShoe{
     position:absolute;
-    width:43px;
-    height:19px;
-    background:#050505;
-    border-radius:15px 12px 5px 5px;
     bottom:-6px;
+    width:44px;
+    height:18px;
+    border-radius:15px 12px 5px 5px;
+    background:#020204;
 }
 
-.leg.left .shoe{left:-10px}
-.leg.right .shoe{right:-10px}
+.pLeg.left .pShoe{left:-9px}
+.pLeg.right .pShoe{right:-9px}
 
-/* ================= BAG ================= */
+/* bag */
 
 .bag{
     position:absolute;
-    width:90px;
-    height:75px;
+    bottom:25%;
+    left:calc(38% + 82px);
+    width:92px;
+    height:76px;
+    border-radius:12px;
+    border:2px solid #566a8c;
+    background:linear-gradient(135deg,#263b5c,#0d1423);
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.5),
+        0 0 25px rgba(79,140,255,.08);
+    opacity:0;
+    transform:translateY(25px);
+    animation:bagShow 1s 6.8s forwards;
+}
+
+@keyframes bagShow{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.bagHandle{
+    position:absolute;
+    left:24px;
+    top:-20px;
+    width:40px;
+    height:22px;
+    border:4px solid #566a8c;
+    border-bottom:0;
+    border-radius:15px 15px 0 0;
+}
+
+.bagZip{
+    position:absolute;
+    left:8px;
+    right:8px;
+    top:13px;
+    height:3px;
+    background:#8396b4;
+}
+
+.bagText{
+    position:absolute;
+    top:34px;
+    width:100%;
+    text-align:center;
+    font-size:11px;
+    letter-spacing:2px;
+    color:#91a8d0;
+}
+
+/* =========================================
+   LOGIN
+========================================= */
+
+#login{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    opacity:0;
+    visibility:hidden;
+    animation:loginIn 1s 8s forwards;
+    position:relative;
+}
+
+@keyframes loginIn{
+    to{
+        opacity:1;
+        visibility:visible;
+    }
+}
+
+.loginCard{
+    position:relative;
+    width:min(420px,100%);
+    padding:38px 30px;
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,.10);
+    background:rgba(11,15,30,.78);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.6),
+        0 0 60px rgba(79,140,255,.07);
+}
+
+.loginCard:before{
+    content:"";
+    position:absolute;
+    inset:-1px;
+    border-radius:26px;
+    padding:1px;
     background:linear-gradient(
+        135deg,
+        rgba(79,140,255,.45),
+        transparent 40%,
+        rgba(139,92,246,.35)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+}
+
+.loginLogo{
+    width:70px;
+    height:70px;
+    margin:0 auto 22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    font-size:25px;
+    font-weight:bold;
+    box-shadow:0 15px 35px rgba(37,99,235,.25);
+}
+
+.loginCard h1{
+    text-align:center;
+    font-size:28px;
+}
+
+.loginCard .subtitle{
+    text-align:center;
+    color:#7f8ba5;
+    margin:9px 0 28px;
+    font-size:14px;
+}
+
+.inputGroup{
+    margin-bottom:15px;
+}
+
+.inputGroup label{
+    display:block;
+    margin-bottom:7px;
+    color:#9ca7bd;
+    font-size:12px;
+}
+
+.input{
+    width:100%;
+    padding:14px 15px;
+    border-radius:11px;
+    border:1px solid #29334a;
+    outline:none;
+    background:#080d1b;
+    color:white;
+    font-size:14px;
+    transition:.25s;
+}
+
+.input:focus{
+    border-color:#4f8cff;
+    box-shadow:0 0 0 3px rgba(79,140,255,.1);
+}
+
+.loginBtn{
+    width:100%;
+    padding:15px;
+    margin-top:5px;
+    border:0;
+    border-radius:11px;
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+    cursor:pointer;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    box-shadow:0 12px 30px rgba(37,99,235,.2);
+    transition:.25s;
+}
+
+.loginBtn:active{
+    transform:scale(.98);
+}
+
+#message{
+    min-height:20px;
+    text-align:center;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.demo{
+    text-align:center;
+    margin-top:20px;
+    color:#4f5a72;
+    font-size:11px;
+}
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+#dashboard{
+    display:none;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 20% 0%,rgba(37,99,235,.12),transparent 25%),
+        #070a12;
+}
+
+header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 6%;
+    background:rgba(7,10,18,.82);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.brand{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.headerButtons{
+    display:flex;
+    gap:7px;
+}
+
+.headerButtons button{
+    padding:9px 12px;
+    border:1px solid #29334a;
+    border-radius:9px;
+    background:#111827;
+    color:white;
+}
+
+.container{
+    width:min(1050px,92%);
+    margin:auto;
+    padding:45px 0;
+}
+
+.hero{
+    padding:38px;
+    border-radius:25px;
+    border:1px solid #202b41;
+    background:
+        radial-gradient(circle at 90% 10%,rgba(124,58,237,.18),transparent 30%),
+        linear-gradient(135deg,#101a30,#10101f);
+}
+
+.hero small{
+    color:#60a5fa;
+    letter-spacing:3px;
+}
+
+.hero h1{
+    margin:13px 0;
+    font-size:clamp(30px,7vw,55px);
+}
+
+.hero p{
+    color:#929db2;
+    line-height:1.7;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin:20px 0;
+}
+
+.stat{
+    padding:22px;
+    border-radius:16px;
+    background:#101522;
+    border:1px solid #202b41;
+}
+
+.stat strong{
+    display:block;
+    font-size:30px;
+    color:#60a5fa;
+}
+
+.stat span{
+    color:#8d98ad;
+    font-size:13px;
+}
+
+.section{
+    margin-top:35px;
+}
+
+.section h2{
+    margin-bottom:18px;
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:22px;
+    border-radius:18px;
+    background:#101522;
+    border:1px solid #202b41;
+}
+
+.avatar{
+    width:85px;
+    height:85px;
+    min-width:85px;
+    border-radius:50%;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#2563eb,#9333ea);
+    font-size:32px;
+    font-weight:bold;
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.profileInfo{
+    flex:1;
+}
+
+.profileInfo p{
+    color:#8e99ae;
+    margin-top:5px;
+    font-size:14px;
+}
+
+.profileButtons button{
+    padding:10px;
+    margin:3px;
+    border-radius:9px;
+    border:1px solid #303a50;
+    background:#172033;
+    color:white;
+}
+
+.skill{
+    padding:18px;
+    margin-bottom:12px;
+    border-radius:14px;
+    background:#101522;
+    border:1px solid #202b41;
+}
+
+.skillTop{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:9px;
+}
+
+.skillTop span:last-child{
+    color:#60a5fa;
+}
+
+.progress{
+    height:8px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#20283a;
+}
+
+.progress div{
+    height:100%;
+    background:linear-gradient(90deg,#2563eb,#9333ea);
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.project{
+    padding:22px;
+    border-radius:16px;
+    background:#101522;
+    border:1px solid #202b41;
+}
+
+.projectIcon{
+    font-size:30px;
+}
+
+.project h3{
+    margin:10px 0;
+}
+
+.project p{
+    color:#8d98ad;
+    line-height:1.6;
+    font-size:14px;
+}
+
+.task{
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:12px;
+    background:#101522;
+    border:1px solid #202b41;
+}
+
+.task label{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.about{
+    padding:22px;
+    border-radius:16px;
+    background:#101522;
+    color:#929db2;
+    line-height:1.8;
+}
+
+footer{
+    text-align:center;
+    padding:35px;
+    color:#4f5a70;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:700px){
+
+    .sceneTop{
+        top:9%;
+    }
+
+    .sceneTop h2{
+        font-size:20px;
+    }
+
+    .person{
+        transform:scale(.72);
+        transform-origin:bottom center;
+    }
+
+    @keyframes personWalk{
+        to{left:27%}
+    }
+
+    .bag{
+        left:calc(27% + 70px);
+        transform:scale(.75);
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .projects{
+        grid-template-columns:1fr;
+    }
+
+    .profile{
+        flex-wrap:wrap;
+    }
+
+    .profileButtons{
+        width:100%;
+    }
+
+    .profileButtons button{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PREMIUM BACKGROUND -->
+
+<div class="bg">
+    <div class="grid"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+</div>
+
+
+<!-- INTRO -->
+
+<div id="intro">
+
+    <div class="introContent">
+
+        <div class="smallLogo">SP</div>
+
+        <div class="introTitle">
+            SHUBHAM PAWAR
+        </div>
+
+        <div class="introSub">
+            PERSONAL PORTFOLIO • 2026
+        </div>
+
+        <div class="introLine">
+            <div class="introProgress"></div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- CINEMATIC MAN SCENE -->
+
+<div id="scene">
+
+    <div class="sceneTop">
+        <span>WELCOME TO MY WORLD</span>
+        <h2>BUILD • LEARN • CREATE</h2>
+    </div>
+
+    <div class="sceneLight"></div>
+
+    <div class="sceneFloor"></div>
+
+
+    <div class="person">
+
+        <div class="shadow"></div>
+
+        <div class="pHead">
+            <div class="pHair"></div>
+            <div class="pEye left"></div>
+            <div class="pEye right"></div>
+            <div class="pNose"></div>
+            <div class="pMouth"></div>
+        </div>
+
+        <div class="pNeck"></div>
+
+        <div class="pBody"></div>
+
+        <div class="pArm left"></div>
+        <div class="pArm right"></div>
+
+        <div class="pLeg left">
+            <div class="pShoe"></div>
+        </div>
+
+        <div class="pLeg right">
+            <div class="pShoe"></div>
+        </div>
+
+    </div>
+
+
+    <div class="bag">
+
+        <div class="bagHandle"></div>
+
+        <div class="bagZip"></div>
+
+        <div class="bagText">
+            WORK
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div id="login">
+
+    <div class="loginCard">
+
+        <div class="loginLogo">
+            SP
+        </div>
+
+        <h1>Welcome Back</h1>
+
+        <div class="subtitle">
+            Access your personal portfolio
+        </div>
+
+
+        <div class="inputGroup">
+
+            <label>USERNAME</label>
+
+            <input
+                id="username"
+                class="input"
+                type="text"
+                placeholder="Enter username"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="inputGroup">
+
+            <label>PASSWORD</label>
+
+            <input
+                id="password"
+                class="input"
+                type="password"
+                placeholder="Enter password"
+            >
+
+        </div>
+
+
+        <button
+            class="loginBtn"
+            onclick="loginUser()"
+        >
+            CONTINUE →
+        </button>
+
+
+        <div id="message"></div>
+
+
+        <div class="demo">
+            Demo: Shubham / 1234
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<header>
+
+    <div class="brand">
+        Shubham.
+    </div>
+
+    <div class="headerButtons">
+        <button onclick="logoutUser()">Logout</button>
+    </div>
+
+</header>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+    <small>PERSONAL PORTFOLIO</small>
+
+    <h1>
+        Hello, I'm Shubham 👋
+    </h1>
+
+    <p>
+        BCA Student • Web Development Learner • Future Developer
+    </p>
+
+</section>
+
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>05</strong>
+        <span>Projects</span>
+    </div>
+
+    <div class="stat">
+        <strong>08</strong>
+        <span>Skills</span>
+    </div>
+
+    <div class="stat">
+        <strong>65%</strong>
+        <span>Learning</span>
+    </div>
+
+</div>
+
+
+<section class="section">
+
+<h2>My Profile</h2>
+
+<div class="profile">
+
+    <div class="avatar">
+
+        <span id="avatarLetter">S</span>
+
+        <img id="profilePhoto">
+
+    </div>
+
+
+    <div class="profileInfo">
+
+        <h3 id="profileName">
+            Shubham Vithoba Pawar
+        </h3>
+
+        <p>BCA Student</p>
+
+        <p>Web Development Learner</p>
+
+    </div>
+
+
+    <div class="profileButtons">
+
+        <button onclick="choosePhoto()">
+            📷 Change Photo
+        </button>
+
+        <button onclick="editName()">
+            ✏️ Edit Name
+        </button>
+
+    </div>
+
+</div>
+
+
+<input
+    id="photoInput"
+    type="file"
+    accept="image/*"
+    style="display:none"
+    onchange="changePhoto(event)"
+>
+
+</section>
+
+
+<section class="section">
+
+<h2>My Skills</h2>
+
+
+<div class="skill">
+
+    <div class="skillTop">
+        <span>HTML</span>
+        <span>85%</span>
+    </div>
+
+    <div class="progress">
+        <div style="width:85%"></div>
+    </div>
+
+</div>
+
+
+<div class="skill">
+
+    <div class="skillTop">
+        <span>CSS</span>
+        <span>75%</span>
+    </div>
+
+    <div class="progress">
+        <div style="width:75%"></div>
+    </div>
+
+</div>
+
+
+<div class="skill">
+
+    <div class="skillTop">
+        <span>JavaScript</span>
+        <span>60%</span>
+    </div>
+
+    <div class="progress">
+        <div style="width:60%"></div>
+    </div>
+
+</div>
+
+
+<div class="skill">
+
+    <div class="skillTop">
+        <span>GitHub</span>
+        <span>65%</span>
+    </div>
+
+    <div class="progress">
+        <div style="width:65%"></div>
+    </div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>My Projects</h2>
+
+<div class="projects">
+
+    <div class="project">
+
+        <div class="projectIcon">🪪</div>
+
+        <h3>ID Card Generator</h3>
+
+        <p>
+            Digital ID card creation project
+            using HTML, CSS and JavaScript.
+        </p>
+
+    </div>
+
+
+    <div class="project">
+
+        <div class="projectIcon">🌐</div>
+
+        <h3>Personal Website</h3>
+
+        <p>
+            Professional personal portfolio
+            website.
+        </p>
+
+    </div>
+
+
+    <div class="project">
+
+        <div class="projectIcon">💻</div>
+
+        <h3>Future Project</h3>
+
+        <p>
+            New projects and experiments
+            coming soon.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>Today's Tasks</h2>
+
+<div class="task">
+<label>
+<input type="checkbox">
+Practice HTML
+</label>
+</div>
+
+<div class="task">
+<label>
+<input type="checkbox">
+Practice CSS
+</label>
+</div>
+
+<div class="task">
+<label>
+<input type="checkbox">
+Learn JavaScript
+</label>
+</div>
+
+<div class="task">
+<label>
+<input type="checkbox">
+Work on Portfolio
+</label>
+</div>
+
+</section>
+
+
+<section class="section">
+
+<h2>About Me</h2>
+
+<div class="about">
+
+I'm Shubham Pawar, a BCA student and
+web development learner.
+
+<br><br>
+
+I'm learning HTML, CSS and JavaScript
+and building projects to improve my
+development skills.
+
+<br><br>
+
+This portfolio represents my learning
+journey and future projects.
+
+</div>
+
+</section>
+
+
+</div>
+
+
+<footer>
+© 2026 Shubham Pawar • Personal Portfolio
+</footer>
+
+</div>
+
+
+<script>
+
+/* ================= LOGIN ================= */
+
+function loginUser(){
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("message");
+
+
+    if(username === "Shubham" && password === "1234"){
+
+        message.style.color="#6ee7b7";
+
+        message.innerHTML="✓ Login Successful";
+
+
+        setTimeout(function(){
+
+            document.getElementById("login")
+                .style.display="none";
+
+            document.getElementById("dashboard")
+                .style.display="block";
+
+            window.scrollTo(0,0);
+
+        },700);
+
+    }else{
+
+        message.style.color="#fb7185";
+
+        message.innerHTML=
+            "✕ Invalid username or password";
+
+    }
+
+}
+
+
+/* ENTER TO LOGIN */
+
+document.getElementById("password")
+.addEventListener("keydown",function(e){
+
+    if(e.key === "Enter"){
+        loginUser();
+    }
+
+});
+
+
+/* ================= PHOTO ================= */
+
+function choosePhoto(){
+
+    document.getElementById("photoInput").click();
+
+}
+
+
+function changePhoto(event){
+
+    const file =
+        event.target.files[0];
+
+    if(!file)return;
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload=function(e){
+
+        const image =
+            document.getElementById("profilePhoto");
+
+        image.src=e.target.result;
+
+        image.style.display="block";
+
+        document.getElementById("avatarLetter")
+            .style.display="none";
+
+        localStorage.setItem(
+            "profilePhoto",
+            e.target.result
+        );
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* LOAD PHOTO */
+
+const savedPhoto =
+    localStorage.getItem("profilePhoto");
+
+if(savedPhoto){
+
+    document.getElementById("profilePhoto")
+        .src=savedPhoto;
+
+    document.getElementById("profilePhoto")
+        .style.display="block";
+
+    document.getElementById("avatarLetter")
+        .style.display="none";
+
+}
+
+
+/* ================= NAME ================= */
+
+function editName(){
+
+    const oldName =
+        localStorage.getItem("profileName") ||
+        "Shubham Vithoba Pawar";
+
+    const newName =
+        prompt("Enter your name:",oldName);
+
+
+    if(newName && newName.trim()){
+
+        document.getElementById("profileName")
+            .innerText=newName.trim();
+
+        localStorage.setItem(
+            "profileName",
+            newName.trim()
+        );
+
+    }
+
+}
+
+
+/* LOAD NAME */
+
+const savedName =
+    localStorage.getItem("profileName");
+
+if(savedName){
+
+    document.getElementById("profileName")
+        .innerText=savedName;
+
+}
+
+
+/* ================= LOGOUT ================= */
+
+function logoutUser(){
+
+    document.getElementById("dashboard")
+        .style.display="none";
+
+    document.getElementById("login")
+        .style.display="flex";
+
+    document.getElementById("username")
+        .value="";
+
+    document.getElementById("password")
+        .value="";
+
+    document.getElementById("message")
+        .innerHTML="";
+
+}
+
+</script>
+
+</body>
+</html>
