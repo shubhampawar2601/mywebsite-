@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shubham | Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --bg:#080b16;
+    --card:rgba(255,255,255,.07);
+    --border:rgba(255,255,255,.12);
+    --text:#fff;
+    --muted:#9ca7ba;
+    --blue:#60a5fa;
+}
+
+body{
+    min-height:100vh;
+    color:var(--text);
+
+    background:
+    radial-gradient(circle at 10% 10%,#243b70 0%,transparent 32%),
+    radial-gradient(circle at 90% 80%,#3b1765 0%,transparent 32%),
+    var(--bg);
+
+    transition:.4s;
+}
+
+/* LIGHT MODE */
+
+body.light{
+    --bg:#eef2ff;
+    --card:rgba(255,255,255,.75);
+    --border:rgba(0,0,0,.08);
+    --text:#111827;
+    --muted:#64748b;
+}
+
+/* HEADER */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:20;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:17px 6%;
+
+    background:rgba(8,11,22,.75);
+    border-bottom:1px solid var(--border);
+
+    backdrop-filter:blur(18px);
+}
+
+body.light header{
+    background:rgba(255,255,255,.75);
+}
+
+.logo{
+    font-size:23px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:var(--blue);
+}
+
+.header-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+
+    border:1px solid var(--border);
+    border-radius:12px;
+
+    background:var(--card);
+    color:var(--text);
+
+    font-size:18px;
+    cursor:pointer;
+}
+
+.logout{
+    padding:11px 17px;
+
+    border:0;
+    border-radius:12px;
+
+    color:white;
+    background:linear-gradient(135deg,#ef4444,#dc2626);
+
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* MAIN */
+
+.container{
+    width:88%;
+    max-width:1200px;
+    margin:35px auto;
+}
+
+/* WELCOME */
+
+.welcome{
+    position:relative;
+    overflow:hidden;
+
+    padding:35px;
+
+    border-radius:26px;
+
+    background:var(--card);
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(18px);
+
+    animation:fadeUp .7s ease;
+}
+
+.welcome h1{
+    font-size:36px;
+    margin-bottom:10px;
+}
+
+.welcome h1 span{
+    color:var(--blue);
+}
+
+.welcome p{
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+
+    margin:25px 0;
+}
+
+.stat{
+    padding:24px;
+
+    border-radius:20px;
+
+    background:var(--card);
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(15px);
+
+    transition:.3s;
+}
+
+.stat:hover{
+    transform:translateY(-6px);
+}
+
+.stat-icon{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.stat h2{
+    font-size:29px;
+}
+
+.stat p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+}
+
+.card{
+    padding:25px;
+
+    border-radius:22px;
+
+    background:var(--card);
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(15px);
+
+    animation:fadeUp .8s ease;
+}
+
+.card h2{
+    margin-bottom:20px;
+}
+
+/* PROFILE */
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+/* PROFILE PHOTO */
+
+.avatar{
+    width:82px;
+    height:82px;
+
+    min-width:82px;
+
+    border-radius:50%;
+
+    overflow:hidden;
+
+    border:3px solid rgba(255,255,255,.25);
+
+    background:linear-gradient(135deg,#2563eb,#9333ea);
+
+    box-shadow:
+    0 10px 30px rgba(59,130,246,.3);
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.profile h3{
+    font-size:21px;
+    margin-bottom:5px;
+}
+
+.profile p{
+    color:var(--muted);
+    margin-top:5px;
+}
+
+.edit{
+    margin-top:18px;
+
+    padding:10px 17px;
+
+    border:1px solid var(--border);
+    border-radius:10px;
+
+    background:transparent;
+    color:var(--text);
+
+    cursor:pointer;
+}
+
+/* SKILLS */
+
+.skill{
+    margin-bottom:18px;
+}
+
+.skill-top{
+    display:flex;
+    justify-content:space-between;
+
+    margin-bottom:8px;
+}
+
+.skill-top span:last-child{
+    color:var(--blue);
+}
+
+.progress{
+    width:100%;
+    height:9px;
+
+    background:rgba(100,116,139,.25);
+
+    border-radius:20px;
+
+    overflow:hidden;
+}
+
+.bar{
+    height:100%;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        90deg,
+        #3b82f6,
+        #8b5cf6
+    );
+
+    animation:progress 1.5s ease;
+}
+
+/* PROJECTS */
+
+.projects{
+    display:grid;
+    gap:13px;
+}
+
+.project{
+    padding:17px;
+
+    border-radius:15px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid var(--border);
+
+    transition:.3s;
+}
+
+.project:hover{
+    transform:translateX(5px);
+}
+
+.project h3{
+    margin-bottom:7px;
+}
+
+.project p{
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* TODO */
+
+.todo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    padding:13px;
+    margin-bottom:10px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.04);
+
+    border:1px solid transparent;
+}
+
+.todo:hover{
+    border-color:var(--border);
+}
+
+.todo input{
+    width:18px;
+    height:18px;
+
+    accent-color:#3b82f6;
+}
+
+.todo input:checked + span{
+    text-decoration:line-through;
+    opacity:.5;
+}
+
+/* ABOUT */
+
+.about{
+    color:var(--muted);
+    line-height:1.8;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    background:rgba(0,0,0,.65);
+
+    z-index:100;
+
+    padding:20px;
+}
+
+.modal-box{
+    width:100%;
+    max-width:400px;
+
+    padding:28px;
+
+    border-radius:22px;
+
+    background:#111827;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.modal-box h2{
+    margin-bottom:20px;
+}
+
+.modal-box input{
+    width:100%;
+
+    padding:13px;
+
+    margin-bottom:12px;
+
+    border:1px solid #334155;
+    border-radius:10px;
+
+    outline:none;
+
+    background:#0f172a;
+    color:white;
+}
+
+.save{
+    width:100%;
+
+    padding:13px;
+
+    border:0;
+    border-radius:10px;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    color:white;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.close{
+    margin-top:10px;
+
+    width:100%;
+
+    padding:11px;
+
+    border:1px solid #334155;
+    border-radius:10px;
+
+    background:transparent;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+
+    padding:35px 10px;
+
+    color:var(--muted);
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+@keyframes progress{
+
+    from{
+        width:0;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:750px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .welcome{
+        padding:25px;
+    }
+
+    .welcome h1{
+        font-size:28px;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    header{
+        padding:15px 4%;
+    }
+
+    .logout{
+        padding:9px 13px;
+    }
+
+    .profile{
+        align-items:flex-start;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <div class="logo">
+        Shubham<span>.</span>
+    </div>
+
+    <div class="header-buttons">
+
+        <button
+            class="icon-btn"
+            onclick="toggleTheme()"
+            id="themeBtn">
+
+            🌙
+
+        </button>
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            Logout
+
+        </button>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- WELCOME -->
+
+<section class="welcome">
+
+    <h1>
+        Welcome,
+        <span id="welcomeName">
+            Shubham 👋
+        </span>
+    </h1>
+
+    <p>
+        This is your personal dashboard.
+        Keep learning, building and improving every day.
+    </p>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="stats">
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            💻
+        </div>
+
+        <h2>05</h2>
+
+        <p>
+            Projects
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            ⚡
+        </div>
+
+        <h2>08</h2>
+
+        <p>
+            Skills
+        </p>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div class="stat-icon">
+            📚
+        </div>
+
+        <h2>65%</h2>
+
+        <p>
+            Learning Progress
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="grid">
+
+
+<!-- PROFILE -->
+
+<div class="card">
+
+    <h2>
+        👤 My Profile
+    </h2>
+
+    <div class="profile">
+
+        <div class="avatar">
+
+            <img
+                src="profile.jpg"
+                alt="Shubham Profile Photo">
+
+        </div>
+
+
+        <div>
+
+            <h3 id="profileName">
+                Shubham Vithoba Pawar
+            </h3>
+
+            <p>
+                BCA Student
+            </p>
+
+            <p>
+                Web Development Learner
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="edit"
+        onclick="openProfile()">
+
+        ✏️ Edit Profile
+
+    </button>
+
+</div>
+
+
+<!-- SKILLS -->
+
+<div class="card">
+
+    <h2>
+        🚀 My Skills
+    </h2>
+
+
+    <div class="skill">
+
+        <div class="skill-top">
+
+            <span>
+                HTML
+            </span>
+
+            <span>
+                90%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="bar"
+                style="width:90%">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="skill">
+
+        <div class="skill-top">
+
+            <span>
+                CSS
+            </span>
+
+            <span>
+                80%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="bar"
+                style="width:80%">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="skill">
+
+        <div class="skill-top">
+
+            <span>
+                JavaScript
+            </span>
+
+            <span>
+                65%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="bar"
+                style="width:65%">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PROJECTS -->
+
+<div class="card">
+
+    <h2>
+        💼 My Projects
+    </h2>
+
+    <div class="projects">
+
+
+        <div class="project">
+
+            <h3>
+                🪪 ID Card Generator
+            </h3>
+
+            <p>
+                Web based ID card generation project.
+            </p>
+
+        </div>
+
+
+        <div class="project">
+
+            <h3>
+                🌐 Personal Website
+            </h3>
+
+            <p>
+                My personal professional website.
+            </p>
+
+        </div>
+
+
+        <div class="project">
+
+            <h3>
+                🔐 Login System
+            </h3>
+
+            <p>
+                Simple frontend login interface.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- LEARNING -->
+
+<div class="card">
+
+    <h2>
+        📚 Learning Progress
+    </h2>
+
+
+    <div class="skill">
+
+        <div class="skill-top">
+
+            <span>
+                Web Development
+            </span>
+
+            <span>
+                70%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="bar"
+                style="width:70%">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="skill">
+
+        <div class="skill-top">
+
+            <span>
+                JavaScript
+            </span>
+
+            <span>
+                55%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="bar"
+                style="width:55%">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="skill">
+
+        <div class="skill-top">
+
+            <span>
+                Programming
+            </span>
+
+            <span>
+                60%
+            </span>
+
+        </div>
+
+        <div class="progress">
+
+            <div
+                class="bar"
+                style="width:60%">
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- TASKS -->
+
+<div class="card">
+
+    <h2>
+        📝 Today's Tasks
+    </h2>
+
+
+    <div class="todo">
+
+        <input type="checkbox">
+
+        <span>
+            Practice HTML & CSS
+        </span>
+
+    </div>
+
+
+    <div class="todo">
+
+        <input type="checkbox">
+
+        <span>
+            Build one mini project
+        </span>
+
+    </div>
+
+
+    <div class="todo">
+
+        <input type="checkbox">
+
+        <span>
+            Learn JavaScript
+        </span>
+
+    </div>
+
+
+    <div class="todo">
+
+        <input type="checkbox">
+
+        <span>
+            Update portfolio
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ABOUT -->
+
+<div class="card">
+
+    <h2>
+        ✨ About Me
+    </h2>
+
+    <p class="about">
+
+        Hello! I'm Shubham, a BCA student
+        interested in technology and web development.
+
+        <br><br>
+
+        I enjoy learning new things and
+        creating useful projects.
+
+    </p>
+
+</div>
+
+
+</section>
+
+</main>
+
+
+<footer>
+
+    © 2026 Shubham | BCA Student
+
+</footer>
+
+
+<!-- EDIT PROFILE MODAL -->
+
+<div
+    class="modal"
+    id="profileModal">
+
+    <div class="modal-box">
+
+        <h2>
+            ✏️ Edit Profile
+        </h2>
+
+
+        <input
+            type="text"
+            id="newName"
+            placeholder="Enter your name">
+
+
+        <button
+            class="save"
+            onclick="saveProfile()">
+
+            Save Profile
+
+        </button>
+
+
+        <button
+            class="close"
+            onclick="closeProfile()">
+
+            Cancel
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* THEME */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light");
+
+    const btn =
+        document.getElementById("themeBtn");
+
+    if(
+        document.body.classList.contains("light")
+    ){
+
+        btn.innerHTML="☀️";
+
+        localStorage.setItem(
+            "theme",
+            "light"
+        );
+
+    }
+    else{
+
+        btn.innerHTML="🌙";
+
+        localStorage.setItem(
+            "theme",
+            "dark"
+        );
+
+    }
+
+}
+
+
+/* LOAD THEME */
+
+if(
+    localStorage.getItem("theme")==="light"
+){
+
+    document.body.classList.add("light");
+
+    document.getElementById(
+        "themeBtn"
+    ).innerHTML="☀️";
+
+}
+
+
+/* OPEN PROFILE */
+
+function openProfile(){
+
+    document.getElementById(
+        "profileModal"
+    ).style.display="flex";
+
+}
+
+
+/* CLOSE PROFILE */
+
+function closeProfile(){
+
+    document.getElementById(
+        "profileModal"
+    ).style.display="none";
+
+}
+
+
+/* SAVE PROFILE */
+
+function saveProfile(){
+
+    const name =
+        document.getElementById(
+            "newName"
+        ).value.trim();
+
+
+    if(name===""){
+
+        alert(
+            "Please enter your name."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "profileName"
+    ).innerHTML=name;
+
+
+    document.getElementById(
+        "welcomeName"
+    ).innerHTML=name+" 👋";
+
+
+    localStorage.setItem(
+        "profileName",
+        name
+    );
+
+
+    closeProfile();
+
+}
+
+
+/* LOAD SAVED NAME */
+
+const savedName =
+    localStorage.getItem(
+        "profileName"
+    );
+
+
+if(savedName){
+
+    document.getElementById(
+        "profileName"
+    ).innerHTML=savedName;
+
+
+    document.getElementById(
+        "welcomeName"
+    ).innerHTML=savedName+" 👋";
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+    window.location.href=
+        "index.html";
+
+}
+
+</script>
+
+</body>
+</html>
